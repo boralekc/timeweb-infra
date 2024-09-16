@@ -28,7 +28,7 @@ jobs:
 
     - name: Set environment variables from secrets
       run: |
-        echo "YC_TOKEN=${{ steps.issue-iam-token.outputs.token }}" >> $GITHUB_ENV
+        echo "TOKEN=${{ steps.issue-iam-token.outputs.token }}" >> $GITHUB_ENV
       
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v1

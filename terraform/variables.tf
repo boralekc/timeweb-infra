@@ -2,18 +2,18 @@ variable "TOKEN" {
   description = "Database username"
 }
 
-variable "SPACE_ACCESS_KEY" {
+variable "ACCESS_KEY" {
   description = "Database username"
 }
 
-variable "SPACE_SECRET_KEY" {
+variable "SECRET_KEY" {
   description = "Database password"
 }
 
-variable "DB_DEUTSCHHUB" {
+variable "CLOUD_ID" {
   description = "Database deutschhub"
 }
 
-variable "DB_DEUTSCHLERN" {
+variable "FOLDER_ID" {
   description = "Database deutschlern"
 }
