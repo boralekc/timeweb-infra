@@ -9,18 +9,8 @@ variable "vpc_region" {
   default     = "dev"
 }
 
-variable "droplet_name" {
+variable "server_name" {
   description = "The AWS region where the S3 bucket will be created"
-  type        = string
-}
-
-variable "droplet_image" {
-  description = "Image of droplet"
-  type        = string
-}
-
-variable "droplet_size" {
-  description = "Type of droplet"
   type        = string
 }
 

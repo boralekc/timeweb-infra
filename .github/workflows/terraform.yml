@@ -19,6 +19,16 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+    
+    - name: IAM Token
+      id: issue-iam-token
+      uses: yc-actions/yc-iam-token@v1
+      with:
+        yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+
+    - name: Set environment variables from secrets
+      run: |
+        echo "YC_TOKEN=${{ steps.issue-iam-token.outputs.token }}" >> $GITHUB_ENV
       
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v1
@@ -31,13 +41,10 @@ jobs:
       continue-on-error: true
 
     - name: Initialize Terraform
-      run: terraform init -input=false -backend-config="access_key=${{ secrets.SPACE_ACCESS_KEY }}" -backend-config="secret_key=${{ secrets.SPACE_SECRET_KEY }}"
-
-    - name: View terrafrom providers
-      run: terraform providers
+      run: terraform init -input=false -backend-config="access_key=${{ secrets.ACCESS_KEY }}" -backend-config="secret_key=${{ secrets.SECRET_KEY }}"
 
     - name: Plan Terraform changes
-      run: terraform plan -input=false -var="TOKEN=${{ secrets.TOKEN }}" -var="SPACE_ACCESS_KEY=${{ secrets.SPACE_ACCESS_KEY }}" -var="SPACE_SECRET_KEY=${{ secrets.SPACE_SECRET_KEY }}" -var="DB_DEUTSCHHUB=${{ secrets.DB_DEUTSCHHUB }}" -var="DB_DEUTSCHLERN=${{ secrets.DB_DEUTSCHLERN }}"
+      run: terraform plan -input=false -var="DB_USER=${{ secrets.DB_USER }}" -var="DB_PASSWORD=${{ secrets.DB_PASSWORD }}" -var="CLOUD_ID=${{ secrets.YC_CLOUD_ID }}" -var="FOLDER_ID=${{ secrets.YC_FOLDER_ID }}" -var="YC_TOKEN=${{ env.YC_TOKEN }}" -var="ACCESS_KEY=${{ secrets.ACCESS_KEY }}" -var="SECRET_KEY=${{ secrets.SECRET_KEY }}"
 
     - name: Apply Terraform changes
-      run: terraform apply --auto-approve -var="TOKEN=${{ secrets.TOKEN }}" -var="SPACE_ACCESS_KEY=${{ secrets.SPACE_ACCESS_KEY }}" -var="SPACE_SECRET_KEY=${{ secrets.SPACE_SECRET_KEY }}" -var="DB_DEUTSCHHUB=${{ secrets.DB_DEUTSCHHUB }}" -var="DB_DEUTSCHLERN=${{ secrets.DB_DEUTSCHLERN }}"
+      run: terraform apply --auto-approve -var="DB_USER=${{ secrets.DB_USER }}" -var="DB_PASSWORD=${{ secrets.DB_PASSWORD }}" -var="CLOUD_ID=${{ secrets.YC_CLOUD_ID }}" -var="FOLDER_ID=${{ secrets.YC_FOLDER_ID }}" -var="YC_TOKEN=${{ env.YC_TOKEN }}" -var="ACCESS_KEY=${{ secrets.ACCESS_KEY }}" -var="SECRET_KEY=${{ secrets.SECRET_KEY }}"

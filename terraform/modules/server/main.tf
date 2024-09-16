@@ -7,15 +7,19 @@ terraform {
   required_version = ">= 0.13"
 }
 
+provider "twc" {
+  token = var.TOKEN
+}
+
 resource "twc_vpc" "k3s-vpc" {
-  name = "K3S-VPC"
+  name = var.vpc_name
   description = "k3s VPC"
   subnet_v4 = "192.168.0.0/24"
-  location = "AMS-1"
+  location = var.vpc_region
 }
 
 data "twc_configurator" "configurator" {
-  location = "AMS-1"
+  location = var.vpc_region
   disk_type = "nvme"
 }
 
@@ -25,7 +29,7 @@ data "twc_os" "os" {
 }
 
 resource "twc_server" "example-server" {
-  name = "k3s"
+  name = var.server_name
   os_id = data.twc_os.os.id
 
   configuration {

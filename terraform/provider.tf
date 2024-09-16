@@ -1,30 +1,29 @@
-provider "digitalocean" {
-  token = var.TOKEN
-}
-
 terraform {
-required_providers {
-    digitalocean = {
-      source  = "digitalocean/digitalocean"
-      version = "~> 2.0"
+  required_providers {
+    yandex = {
+      source  = "yandex-cloud/yandex"
+      version = "0.120.0"
     }
   }
 
   backend "s3" {
     endpoints = {
-      s3 = "https://fra1.digitaloceanspaces.com"
+      s3 = "https://storage.yandexcloud.net"
     }
-    access_key     = var.SPACE_ACCESS_KEY
-    secret_key     = var.SPACE_SECRET_KEY
-    bucket         = "s3state"
-    key            = "terraform-state/terraform.tfstate"
+    bucket = "timeweb-state"
+    region = "ru-central1"
+    key    = "timeweb-state/terraform.tfstate"
 
-    # Deactivate a few AWS-specific checks
-    skip_credentials_validation = true
-    skip_requesting_account_id  = true
-    skip_metadata_api_check     = true
     skip_region_validation      = true
-    skip_s3_checksum            = true
-    region                      = "us-east-1"
+    skip_credentials_validation = true
+    skip_requesting_account_id  = true # This option is required to describe backend for Terraform version 1.6.1 or higher.
+    skip_s3_checksum            = true # This option is required to describe backend for Terraform version 1.6.3 or higher.
   }
+}
+
+provider "yandex" {
+  cloud_id                 = var.CLOUD_ID
+  folder_id                = var.FOLDER_ID
+  zone                     = "ru-central1-a"
+  service_account_key_file = var.YC_TOKEN != "" ? "" : "D:\\Dev\\yandex-key\\authorized_key.json"
 }
