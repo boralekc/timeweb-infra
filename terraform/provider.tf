@@ -25,5 +25,5 @@ provider "yandex" {
   cloud_id                 = var.CLOUD_ID
   folder_id                = var.FOLDER_ID
   zone                     = "ru-central1-a"
-  service_account_key_file = var.YC_TOKEN != "" ? "" : "D:\\Dev\\yandex-key\\authorized_key.json"
+  service_account_key_file = var.TOKEN != "" ? "" : "D:\\Dev\\yandex-key\\authorized_key.json"
 }
