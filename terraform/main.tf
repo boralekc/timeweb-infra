@@ -1,7 +1,7 @@
 module "server" {
   source        = "./modules/server"
   vpc_name      = "k3s-vpc"
-  vpc_region    = "nl-1"
+  vpc_region    = "ru-1"
   server_name  = "k3s"
   token         = var.TWC_TOKEN
 }
