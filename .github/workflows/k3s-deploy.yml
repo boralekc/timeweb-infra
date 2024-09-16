@@ -21,7 +21,7 @@ jobs:
         env:
           ANSIBLE_HOST_KEY_CHECKING: "false"
           DROPLET_IP: ${{ secrets.DROPLET_IP }}
-          ANSIBLE_CONFIG: ${{ vars.ANSIBLE_CONFIG }}
+          ANSIBLE_CONFIG: ${{ github.workspace }}/ansible
           # DROPLET_PASSWORD: ${{ secrets.DROPLET_PASSWORD }}
           SSH_KEY: ${{ secrets.SSH_KEY }}
         run: |
