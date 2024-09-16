@@ -2,6 +2,10 @@ variable "TOKEN" {
   description = "Database username"
 }
 
+variable "TWC_TOKEN" {
+  description = "Database username"
+}
+
 variable "ACCESS_KEY" {
   description = "Database username"
 }
