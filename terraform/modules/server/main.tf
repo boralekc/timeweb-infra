@@ -42,4 +42,8 @@ resource "twc_server" "example-server" {
   local_network {
     id = twc_vpc.k3s-vpc.id
   }
+
+  external_access {
+    type = "ipv4"
+  }
 }
