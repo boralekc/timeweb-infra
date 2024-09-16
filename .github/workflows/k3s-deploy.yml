@@ -1,0 +1,28 @@
+name: App deploy workflow
+
+on:
+  push:
+    tags:
+      - app-*
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSL_KEY }}
+
+      - name: Run Ansible playbook
+        env:
+          ANSIBLE_HOST_KEY_CHECKING: "false"
+          DROPLET_IP: ${{ secrets.DROPLET_IP }}
+          ANSIBLE_CONFIG: ${{ vars.ANSIBLE_CONFIG }}
+          # DROPLET_PASSWORD: ${{ secrets.DROPLET_PASSWORD }}
+          SSL_KEY: ${{ secrets.SSL_KEY }}
+        run: |
+          ansible-playbook -i ${{ github.workspace }}/ansible/inventory.yml ${{ github.workspace }}/ansible/playbooks/k3s.yml

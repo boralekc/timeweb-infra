@@ -1,0 +1,7 @@
+all:
+  hosts:
+    droplet:
+      ansible_host: "{{ lookup('env', 'DROPLET_IP') }}"
+      ansible_user: root
+      ansible_ssh_private_key_file: "{{ lookup('env', 'SSL_KEY') }}"
+      # ansible_ssh_pass: "{{ lookup('env', 'DROPLET_PASSWORD') }}"
