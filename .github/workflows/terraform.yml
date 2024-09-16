@@ -44,7 +44,7 @@ jobs:
       run: terraform init -input=false -backend-config="access_key=${{ secrets.ACCESS_KEY }}" -backend-config="secret_key=${{ secrets.SECRET_KEY }}"
 
     - name: Plan Terraform changes
-      run: terraform plan -input=false -var="CLOUD_ID=${{ secrets.CLOUD_ID }}" -var="FOLDER_ID=${{ secrets.FOLDER_ID }}" -var="TOKEN=${{ env.TOKEN }}" -var="TWC_TOKEN=${{ env.TWC_TOKEN }}" -var="ACCESS_KEY=${{ secrets.ACCESS_KEY }}" -var="SECRET_KEY=${{ secrets.SECRET_KEY }}"
+      run: terraform plan -input=false -var="CLOUD_ID=${{ secrets.CLOUD_ID }}" -var="FOLDER_ID=${{ secrets.FOLDER_ID }}" -var="TOKEN=${{ env.TOKEN }}" -var="TWC_TOKEN=${{ secrets.TWC_TOKEN }}" -var="ACCESS_KEY=${{ secrets.ACCESS_KEY }}" -var="SECRET_KEY=${{ secrets.SECRET_KEY }}"
 
     - name: Apply Terraform changes
-      run: terraform apply --auto-approve -var="CLOUD_ID=${{ secrets.CLOUD_ID }}" -var="FOLDER_ID=${{ secrets.FOLDER_ID }}" -var="TOKEN=${{ env.TOKEN }}" -var="TWC_TOKEN=${{ env.TWC_TOKEN }}" -var="ACCESS_KEY=${{ secrets.ACCESS_KEY }}" -var="SECRET_KEY=${{ secrets.SECRET_KEY }}"
+      run: terraform apply --auto-approve -var="CLOUD_ID=${{ secrets.CLOUD_ID }}" -var="FOLDER_ID=${{ secrets.FOLDER_ID }}" -var="TOKEN=${{ env.TOKEN }}" -var="TWC_TOKEN=${{ secrets.TWC_TOKEN }}" -var="ACCESS_KEY=${{ secrets.ACCESS_KEY }}" -var="SECRET_KEY=${{ secrets.SECRET_KEY }}"
