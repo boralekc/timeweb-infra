@@ -1,7 +1,7 @@
-module "droplet" {
-  source        = "./modules/droplet"
+module "server" {
+  source        = "./modules/server"
   vpc_name      = "k3s-vpc"
-  vpc_region    = "fra1"
+  vpc_region    = "AMS-1"
   droplet_name  = "k3s-droplet"
   droplet_image = "ubuntu-20-04-x64"
   droplet_size  = "s-2vcpu-4gb"
