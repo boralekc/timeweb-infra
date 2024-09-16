@@ -34,7 +34,7 @@ resource "twc_server" "k3s" {
 
   configuration {
     configurator_id = data.twc_configurator.configurator.id
-    disk = 51200
+    disk = 1024 * 5 * 10
     cpu = 2
     ram = 4096
   }
