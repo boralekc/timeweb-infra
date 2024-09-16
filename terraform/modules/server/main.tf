@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "twc" {
-  token = var.TOKEN
+  token = var.token
 }
 
 resource "twc_vpc" "k3s-vpc" {
