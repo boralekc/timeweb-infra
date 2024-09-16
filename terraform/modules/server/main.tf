@@ -28,7 +28,7 @@ data "twc_os" "os" {
   version = "22.04"
 }
 
-resource "twc_server" "example-server" {
+resource "twc_server" "k3s" {
   name = var.server_name
   os_id = data.twc_os.os.id
 
